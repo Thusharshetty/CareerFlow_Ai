@@ -23,8 +23,8 @@ const jobSlice=createSlice({
             state.jobs.push(action.payload);
         },
         updateJobStatusLocal:(state,action)=>{
-            const {jobId,status}=action.payload;
-            const index=state.jobs.findIndex(job=>job._id===jobId);
+            const {id,status}=action.payload;
+            const index=state.jobs.findIndex(job=>job._id===id);
             if(index!==-1){
                 state.jobs[index].status=status;
             }

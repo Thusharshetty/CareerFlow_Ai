@@ -1,8 +1,9 @@
 const Job=require('../models/job');
 
 exports.getJobs= async (req,res)=>{
+    const currentUserId = String(req.user.id);
    try{
-    const jobs=await Job.find({userId:req.user._id}).sort({createdAt:-1})
+    const jobs=await Job.find({userId:currentUserId}).sort({createdAt:-1})
     res.json(jobs)
    } catch (err) {
         res.status(500).json({ message: 'Server Error' });
