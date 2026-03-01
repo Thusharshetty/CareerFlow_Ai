@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { fetchJobsStart, fetchJobsSuccess, fetchJobsFailure, updateJobStatusLocal } from '../redux/jobSlice';
 import AddJobModel from '../components/AddJobModel.jsx';
+import AiInsightModal from '../components/AiInsightModal';
 
 
 const columns = {
@@ -24,10 +25,11 @@ const Dashboard = () => {
   const { jobs, loading } = useSelector((state) => state.jobs);
   const { token, user } = useSelector((state) => state.auth);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedJobForAI, setSelectedJobForAI] = useState(null);
 
   useEffect(() => {
     if (!token) {
-      navigate('/login');
+      navigate('/');
       return;
     }
     const fetchJobs = async () => {
@@ -59,7 +61,7 @@ const Dashboard = () => {
   }
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate('/');
   };
 
   return (
@@ -68,12 +70,12 @@ const Dashboard = () => {
         <h1 className='text-3xl font-bold text-slate-800'>CareerFlow Board</h1>
         <div className="flex items-center gap-4">
           <span className="text-slate-600">Welcome, {user?.username}</span>
-          <button 
-             onClick={() => setIsModalOpen(true)}
-             className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded shadow transition"
-           >
-             + Add Job
-           </button>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded shadow transition"
+          >
+            + Add Job
+          </button>
           <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
             Logout
           </button>
@@ -105,6 +107,12 @@ const Dashboard = () => {
                             >
                               <h3 className="font-semibold text-slate-800">{job.company}</h3>
                               <p className="text-sm text-slate-600">{job.position}</p>
+                              <button
+                                onClick={() => setSelectedJobForAI(job)}
+                                className="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded border border-indigo-100 hover:bg-indigo-100"
+                              >
+                                ✨ AI Analyze
+                              </button>
                             </div>
                           )}
                         </Draggable>
@@ -118,6 +126,12 @@ const Dashboard = () => {
         </DragDropContext>
       )}
       {isModalOpen && <AddJobModel onClose={() => setIsModalOpen(false)} />}
+      {selectedJobForAI && (
+        <AiInsightModal
+          job={selectedJobForAI}
+          onClose={() => setSelectedJobForAI(null)}
+        />
+      )}
     </div>
   );
 };
