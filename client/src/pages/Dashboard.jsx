@@ -29,7 +29,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate('/');
+      navigate('/login');
       return;
     }
     const fetchJobs = async () => {
