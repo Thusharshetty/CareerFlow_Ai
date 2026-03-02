@@ -3,7 +3,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
+import About from './pages/About';
 import { useSelector } from 'react-redux';
+
 
 function App() {
   const { token } = useSelector((state) => state.auth);
@@ -11,6 +13,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Home/>}/>
+      <Route path="/about" element={<About />} />
       <Route path='/login' element={!token?<Login/>:<Navigate to='/dashboard'/>}/>
       <Route path='/register' element={!token?<Register/>:<Navigate to='/dashboard'/>}/>
       <Route path='/dashboard' element={token?<Dashboard/>:<Navigate to='/login'/>}/>
