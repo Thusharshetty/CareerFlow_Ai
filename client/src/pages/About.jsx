@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '/logo2.png';
+import founderPhoto from '/Founder.png';
+import Footer from './Footer';
 
 const About = () => {
   return (
@@ -64,8 +66,45 @@ const About = () => {
           </div>
         </div>
 
+       <div className='bg-white/60 backdrop-blur-md rounded-[3rem] p-10 lg:p-14 flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto shadow-2xl shadow-slate-200/40 border border-white relative overflow-hidden'>
+       <div className="absolute top-0 left-0 w-64 h-64 bg-[#FFD166]/10 rounded-full blur-3xl -z-10 -translate-x-1/2 -translate-y-1/2"></div>
+       <div className='w-full md:w-1/3 flex-shrink-0'>
+       <div className='w-full h-full relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/50"'>
+         <img 
+                src={founderPhoto} 
+                alt="Your CareerFlow Founder" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-xl text-white">
+                <span className="text-sm font-semibold">Founder & Developer</span>
+              </div>
+       </div>
+       </div>
 
-        <div className='bg-slate-900 rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden shadow-2xl'>
+       <div className='w-full md:w-2/3 space-y-6'>
+       <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              A personal vision <br className="hidden md:block" />
+              for finding your flow.
+            </h2>
+            <p className="text-slate-600 text-sm font-medium leading-relaxed italic">
+              "Finding your next big career step shouldn't be defined by cognitive load. After too many job searches spent staring at cold, confusing spreadsheets, I realized something important: tech needs to be humanized. I didn't want a tool that just tracked applications; I wanted a workspace that helped me find my focus. That's why I built CareerFlow. This is a premium workspace for managers and developers—designed to take the stress away so you can focus on preparation and landing the dream role. If you have been feeling the spreadsheet chaos, I invite you to try a different path. Organize beautifully, and find your flow."
+            </p>
+            <div className='flex items-center gap-3 pt-4'>
+              <div className="w-12 h-12 bg-[#FFD166] rounded-full flex items-center justify-center font-bold text-slate-900 text-xl border-2 border-white">
+                T
+              </div>
+              <div>
+                <span className="block font-bold text-slate-800">Thushar Shetty</span>
+                <span className="block text-xs text-slate-400 font-medium">CareerFlow Developer</span>
+              </div>
+            </div>
+       </div>
+       </div>
+
+
+
+        <div className='bg-slate-900 rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden shadow-2xl mt-24'>
             <div className="absolute top-1/2 left-0 w-64 h-64 bg-[#FFD166]/20 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2"></div>
             <div className="absolute top-1/2 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
 
@@ -82,6 +121,7 @@ const About = () => {
         </div>
         
       </main>
+      <Footer />
     </div>
   );
 };
